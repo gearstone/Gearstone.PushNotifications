@@ -4,6 +4,7 @@ namespace Gearstone.PushNotifications
 {
     public interface IRegistrationService
     {
-        void RegisterDevice(Platform platform, string pnsHandle, string deviceIdentifier, IList<string> tags);
+        void CreateRegistration(string deviceIdentifier, Platform platform, string pnsHandle, IList<string> tags);
+        void DeleteRegistration(string deviceIdentifier);
     }
 }

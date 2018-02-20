@@ -14,7 +14,7 @@ namespace Gearstone.PushNotifications.WindowsAzure
             this.hubClient = hubClient;
         }
 
-        public void RegisterDevice(Platform platform, string pnsHandle, string deviceIdentifier, IList<string> tags)
+        public void CreateRegistration(string deviceIdentifier, Platform platform, string pnsHandle, IList<string> tags)
         {
             if (string.IsNullOrEmpty(pnsHandle)) throw new ArgumentException(nameof(pnsHandle));
             if (string.IsNullOrEmpty(deviceIdentifier)) throw new ArgumentException(nameof(deviceIdentifier));
@@ -29,6 +29,11 @@ namespace Gearstone.PushNotifications.WindowsAzure
             };
 
             hubClient.CreateOrUpdateInstallation(install);
+        }
+
+        public void DeleteRegistration(string deviceIdentifier)
+        {
+            hubClient.DeleteInstallation(deviceIdentifier);
         }
 
         IDictionary<string, InstallationTemplate> GetTemplatesForPlatform(Platform platform)

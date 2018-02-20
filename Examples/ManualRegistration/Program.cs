@@ -27,7 +27,7 @@ namespace notifications
             var regSvc = new AzureRegistrationService(hubClient);
             var deviceIdentifier = "device4567";
             var userIdentifier = "user1234";
-            regSvc.RegisterDevice(Platform.Google, chromePnsHandle, deviceIdentifier, new string[] { userIdentifier, deviceIdentifier });
+            regSvc.CreateRegistration(deviceIdentifier, Platform.Google, chromePnsHandle, new string[] { userIdentifier, deviceIdentifier });
 
             // Send a notification to a user (will go to all the devices they have registered on)
             var notifySvc = new AzureNotificationService(hubClient);

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gearstone.PushNotifications
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualRegistration", "Examples\ManualRegistration\ManualRegistration.csproj", "{7D739DEE-F4B7-45A0-9DD7-9D2752988E51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationWebApi", "Examples\RegistrationWebApi\RegistrationWebApi.csproj", "{26C16AD8-4621-483C-8560-B86CC38B2AF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiRegistration", "Examples\WebApiRegistration\WebApiRegistration.csproj", "{26C16AD8-4621-483C-8560-B86CC38B2AF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
