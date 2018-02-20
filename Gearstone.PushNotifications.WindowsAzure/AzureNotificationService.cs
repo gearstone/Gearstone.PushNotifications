@@ -18,7 +18,7 @@ namespace Gearstone.PushNotifications.WindowsAzure
         {
             var templateValues = new Dictionary<string, string> { { "message", message } };
 
-            await hubClient.SendTemplateNotificationAsync(templateValues, destinationTag + "&&text");
+            await hubClient.SendTemplateNotificationAsync(templateValues, $"({destinationTag})&&text");
         }
     }
 }
