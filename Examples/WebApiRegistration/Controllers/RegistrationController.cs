@@ -23,23 +23,16 @@ namespace RegistrationWebApi.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]RegistrationModel model)
+        public void Post([FromBody]Registration model)
         {
-            registrationSvc.CreateRegistration(model.Identifier, model.Platform, model.Handle, new string[] { User.Claims.First(x => x.Type == ClaimTypes.Email).Value, model.Identifier });
+            registrationSvc.CreateRegistration(model, new string[] { User.Claims.First(x => x.Type == ClaimTypes.Email).Value, model.DeviceIdentifier });
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{installation}")]
         public void Delete(string installation)
         {
             registrationSvc.DeleteRegistration(installation);
         }
-    }
-
-    public class RegistrationModel
-    {
-        public String Identifier { get; set; }
-        public Platform Platform { get; set; }
-        public String Handle { get; set; }
     }
 }

@@ -22,12 +22,20 @@ namespace notifications
             var hubClient = NotificationHubClient.CreateClientFromConnectionString(hubConnection, hubName);
 
             string chromePnsHandle = "APA91bEGv8n_2g_5wv1Cxj6Q9KumQZdLp8uoSzAtdhIJW27cGglow33CDHqpDFEXhae5dwRVN-m99W_tiHBriMmC5DDRxd_vR-uQPNiOdPDt2XK4qLtMMO2aJQlGq1wMihx-b7IcDZl528Ocx6I_x5ug4e6UVkPYbQ";
+            var deviceIdentifier = "device4567";
+            var userIdentifier = "user1234";
 
             // Register a device and tag it with who it belongs to
             var regSvc = new AzureRegistrationService(hubClient);
-            var deviceIdentifier = "device4567";
-            var userIdentifier = "user1234";
-            regSvc.CreateRegistration(deviceIdentifier, Platform.Google, chromePnsHandle, new string[] { userIdentifier, deviceIdentifier });
+
+            var registration = new Registration
+            {
+                DeviceIdentifier = deviceIdentifier,
+                PnsHandle = chromePnsHandle,
+                Platform = Platform.Google
+            };
+
+            regSvc.CreateRegistration(registration, new string[] { userIdentifier, deviceIdentifier });
 
             // Send a notification to a user (will go to all the devices they have registered on)
             var notifySvc = new AzureNotificationService(hubClient);
