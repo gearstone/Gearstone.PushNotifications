@@ -5,33 +5,40 @@ using Microsoft.Azure.NotificationHubs;
 using Gearstone.PushNotifications;
 using Gearstone.PushNotifications.WindowsAzure;
 
-// Connect to the Azure Notification Hub
-var connectionString = "<listen only connection string>";
+var hubConnection = "<listen only hub connection string>";
 var hubName = "<hub name>";
-var hub = NotificationHubClient.CreateClientFromConnectionString(connectionString, hubName);
+var hubClient = NotificationHubClient.CreateClientFromConnectionString(hubConnection, hubName);
 
-// Register the device
-var registrationId = "<the id you get from registering a device with Firebase>";
-var installationId = "<a string that uniquely identifies the device you are installing on>";
-var userId = "<a string that uniquely identifies the user of this device">;
-var registrationSvc = new AzureRegistrationService(hub);
-registrationSvc.RegisterDevice(Platform.Google, registrationId, installationId, new string[] { userId });
+string chromePnsHandle = "<a handle from registering for Firebase notifications>";
+var deviceIdentifier = "<a unique device identifier>";
+var userIdentifier = "<an optional user identifier>";
+
+// Register a device and tag it with who it belongs to
+var regSvc = new AzureRegistrationService(hubClient);
+
+var registration = new Registration
+{
+    DeviceIdentifier = deviceIdentifier,
+    PnsHandle = chromePnsHandle,
+    Platform = Platform.Google
+};
+
+regSvc.CreateRegistration(registration, new string[] { userIdentifier, deviceIdentifier });
 ```
 
 ### Sending notifications
 ```c#
 using Microsoft.Azure.NotificationHubs;
+using Gearstone.PushNotifications;
 using Gearstone.PushNotifications.WindowsAzure;
 
-// Connect to the Azure Notification Hub
-var connectionString = "<listen only connection string>";
+var hubConnection = "<listen only hub connection string>";
 var hubName = "<hub name>";
-var hub = NotificationHubClient.CreateClientFromConnectionString(connectionString, hubName);
+var hubClient = NotificationHubClient.CreateClientFromConnectionString(hubConnection, hubName);
 
-// Send the message
-var userId = "<a userid that you have previously used when registering a device>";
-var notificationSvc = new AzureNotificationService(hub);
-await notificationSvc.SendTextMessage("Hello, World!", userId);
+var notifySvc = new AzureNotificationService(hubClient);
+var destinationTag = "<tag>"; // Could be anything you've used as a tag, will go to all devices which have the tag
+await notifySvc.SendTextNotification("Hello, Gearstone!", destinationTag);
 ```
 
 #### Notes
