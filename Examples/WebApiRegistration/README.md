@@ -1,4 +1,4 @@
-Experimental Web API registration endpoint for push notifications.
+## Experimental Web API registration endpoint for push notifications
 
 This exposes three /api endpoints:
 
@@ -42,3 +42,21 @@ DELETE `/api/registrations/<id>`
 This should be used to delete an existing device registration when the app is uninstalled, if it is possible to detect such a thing.
 
 `<id>` should be the Device Identifier which was used to register for notifications when the app was installed.
+
+## Publishing
+
+This can be published to `now.sh` as follows:
+
+```
+dotnet publish -c Release
+now
+now alias
+```
+
+Or to docker:
+
+```
+dotnet publish -c Release
+docker build . -t gs-notifications
+docker run -it gs-notifications
+```
