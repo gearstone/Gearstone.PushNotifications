@@ -25,7 +25,7 @@ namespace RegistrationWebApi.Controllers
         [HttpPost]
         public void Post([FromBody]Registration model)
         {
-            registrationSvc.CreateRegistration(model, new string[] { User.Claims.First(x => x.Type == ClaimTypes.Email).Value, model.DeviceIdentifier });
+            registrationSvc.CreateRegistration(model, new string[] { User.Identity.Name, model.DeviceIdentifier });
         }
 
         [HttpDelete]
